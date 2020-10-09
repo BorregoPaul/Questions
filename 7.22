@@ -1,0 +1,93 @@
+package testing;
+import java.util.Scanner;
+
+//Input quick 84 7 23 4 4 5 30 2 66 9
+
+public class PlayerRoster {
+   
+   public static int[] player(int x) { //start of program / finds player
+      Scanner scnr = new Scanner(System.in);
+      int[] player = new int[2];
+      System.out.format("Enter player %d's jersey number: ", x);
+      player[0] = scnr.nextInt();
+      System.out.format("Enter player %d's rating: ", x);
+      player[1] = scnr.nextInt();
+      return player;
+      }
+   
+   public static void output(int [][] roster) { // outputs roster
+       for (int i = 0; i < 5; i++) {
+          System.out.format("Player %d -- Jersey Number: %d, Rating: %d%n",i + 1,roster[i][0],roster[i][1]);}}
+   public static int[][] update(int[][] roster) { // updates roster
+       Scanner scnr = new Scanner(System.in);
+       int z = 0;
+       System.out.println("Enter a jersey number:");
+       int x = scnr.nextInt();
+       System.out.println("Enter a new rating for player:");
+       int y = scnr.nextInt();
+
+       for (int i = 0; i < 5; i++) {
+           if(roster[i][0] == x) {z = i; break;}
+       }
+       roster[z][1] = y;
+    return roster;}
+   public static void above(int [][] roster) { // outpust the players above  a certain rating
+       Scanner scnr = new Scanner(System.in);
+       System.out.println("Enter a rating:");
+       int x = scnr.nextInt();
+       System.out.println("Above " + x);
+       for (int i = 0; i < 5; i++) {if (roster[i][1] > x) {System.out.format("Player %d -- Jersey Number: %d, Rating: %d%n",i + 1,roster[i][0],roster[i][1]);}}
+   }
+   public static int[][] replace(int [][] roster) { // replaces a player
+       Scanner scnr = new Scanner(System.in);
+       System.out.println("Enter a jersey number:");
+       int x = scnr.nextInt();
+       System.out.println("Enter a new jersey number:");
+       int y = scnr.nextInt();
+       System.out.println("Enter rating for the new player:");
+       int z = scnr.nextInt();
+       for (int i = 0; i < 5; i++) {if(roster[i][0] == x) {roster[i][0] = y;roster[i][1] = z; break;}}
+
+               
+       return roster;   }
+   public static void menu(int [][] roster) { // menu
+    Scanner scnr = new Scanner(System.in);
+    boolean quit = false;
+    while(!quit) {
+        System.out.print("MENU\n" + "u - Update player rating\n" + 
+        "a - Output players above a rating\n" + "r - Replace player\n" +
+        "o - Output roster\n" +"q - Quit\n");
+        char x = scnr.next().charAt(0);
+
+       switch (x) {
+           case 'o':
+               output(roster);
+               break;
+           case 'u':
+               update(roster);
+               break;
+           case 'q':
+               quit = true;
+               break;
+           case 'a':
+               above(roster);
+               break;
+           case 'r':
+               replace(roster);
+               break;
+           default:
+               break;
+       }}
+   }
+   
+   public static void main(String[] args) { //main
+      int [] p1 = player(1);
+      int [] p2 = player(2);
+      int [] p3 = player(3);
+      int [] p4 = player(4);
+      int [] p5 = player(5);
+      
+      int [][] roster = {p1, p2, p3, p4, p5};
+      menu(roster);
+      }
+   }
